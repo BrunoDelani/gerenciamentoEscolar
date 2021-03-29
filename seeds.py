@@ -55,9 +55,16 @@ senha_plana_professor_3 = "professor3"
 senha_encriptada_professor_3 = bcrypt.hashpw(senha_plana_professor_3.encode('utf-8'), bcrypt.gensalt())
 professor_3 = Professor(nome="Tays Rutti", email="taysrutti@gmail.com", senha=senha_encriptada_professor_3)
 
+#Professor 4:
+senha_plana_professor_4 = "professor4"
+senha_encriptada_professor_4 = bcrypt.hashpw(senha_plana_professor_4.encode('utf-8'), bcrypt.gensalt())
+professor_4 = Professor(nome="Diogo Cléber", email="dcifro@gmail.com", senha=senha_encriptada_professor_4)
+
+
 db.session.add(professor_1)
 db.session.add(professor_2)
 db.session.add(professor_3)
+db.session.add(professor_4)
 db.session.commit()
 
 # Professor_Disciplinas

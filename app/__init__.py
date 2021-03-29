@@ -4,8 +4,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://suporte:SuportE99@localhost/GerenciamentoEscolar'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+ os.getenv("DB_USUARIO") + ':' + os.getenv("DB_PASSWORD") + '@' + os.getenv("DB_LOCAL") + '/' + os.getenv("DB_DATABASE") + ''
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -14,3 +19,6 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 from app.models.tables import Aluno, Disciplina, Professor, Professor_disciplina, Etapa, Nota
+from app.controllers import professor
+from app.controllers import aluno
+from app.controllers import disciplina

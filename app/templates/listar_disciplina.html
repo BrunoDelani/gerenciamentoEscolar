@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<h1>Listagem de Disciplinas</h1>
+
+{% if msg == 'deletado' %}
+<div class="alert alert-danger" id="sumir" role="alert">Deletado com sucesso!</div>
+<meta http-equiv="refresh" content="1; URL='http://127.0.0.1:5000/disciplinas'"/>
+{% endif %}
+
+{% if msg == 'alterado' %}
+<div class="alert alert-warning" id="sumir" role="alert">Alterado com sucesso!</div>
+<meta http-equiv="refresh" content="1; URL='http://127.0.0.1:5000/disciplinas'"/>
+{% endif %}
+
+{% if msg == 'inserir' %}
+<div class="alert alert-success" id="sumir" role="alert">Inserido com sucesso!</div>
+<meta http-equiv="refresh" content="1; URL='http://127.0.0.1:5000/disciplinas'"/>
+{% endif %}
+
+{% if lista|count > 0 %}
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Calculo</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for i in lista %}
+    <tr>
+        <td>{{ i.id }}</td>
+        <td>{{ i.nome }}</td>
+        <td>{{ i.calculo }}</td>
+        <td><input type="button" class="btn btn-danger" value="Deletar" onclick=excluirItemSelecionado({{ i.id }})></td>
+        <td><a href='/disciplinas/alterar/{{ i.id }}' class="btn btn-warning">Alterar</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<div class="alert alert-danger">Nenhuma disciplina encontrada para esta busca.</div>
+
+{% endif %}
+<a type="button" class="btn btn-primary" href='/disciplinas/inserir'>Inserir nova disciplina</a>
+<script>
+    setTimeout(function() {
+    $('#sumir').fadeOut('fast');
+    }, 1000);
+
+
+    function excluirItemSelecionado(id) {
+        var x;
+        var r = confirm("Deseja realmente excluir?");
+        if (r == true) {
+            window.location.href='http://127.0.0.1:5000/disciplinas/deletar/'+id;
+        }
+        else {
+            x = "Cancelar";
+        }
+    }
+</script>
+{% endblock %}

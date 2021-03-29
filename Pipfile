@@ -10,6 +10,7 @@ flask-script = ""
 flask-migrate = ""
 pymysql = ""
 bcrypt = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
