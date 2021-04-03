@@ -5,10 +5,27 @@ from app import db
 import bcrypt
 
 @app.route('/professores')
-def listar_professores():
+@app.route('/professores/pagina/<int:pagina>/')
+def listar_professores(pagina = 1):
     msg = request.args.get('msg')
-    professores = Professor.query.all()
-    return render_template("listar_professores.html", lista=professores, mensagem = msg)
+    nome = request.args.get('nome')
+    if nome:
+        nome = '%' + nome + '%'
+        paginacao = Professor.query.filter(Professor.nome.like(nome)).paginate(page = pagina, per_page= 5)
+        professores = paginacao.items
+        total_paginas = paginacao.total
+        totalpaginas = total_paginas/5
+        totalpaginas = round(totalpaginas + 0.5)
+    else:
+        # professores = Professor.query.all()
+        paginacao = Professor.query.paginate(page = pagina, per_page= 5)
+        professores = paginacao.items
+        total_paginas = paginacao.total
+        totalpaginas = total_paginas/5
+        totalpaginas = round(totalpaginas + 0.5)
+
+
+    return render_template("listar_professores.html", lista=professores, mensagem = msg, paginas = int(totalpaginas), pagina_atual = pagina)
 
 
 @app.route('/professores/deletar/<professor_id>')

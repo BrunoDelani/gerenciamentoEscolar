@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block conteudo %}
-
-<h1>Listagem de professores</h1>
+<div style="display: flex; justify-content: space-between; margin: 20px auto;">
+<h3>Listagem de professores</h3>
+<a type="button" class="btn btn-primary" href='/professores/inserir'>Inserir novo professor</a>
+</div>
 
 {% if mensagem == 'deletado' %}
 <div class="alert alert-danger" id="sumir" role="alert">Deletado com sucesso!</div>
@@ -20,6 +22,20 @@
 {% endif %}
 
 {% if lista|count > 0 %}
+
+<form class="row g-3" method="GET" action="/professores">
+    <div class="col-auto">
+        <label>Nome:</label>
+      </div>
+    <div class="col-auto">
+      <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-3">Pesquisar</button>
+    </div>
+  </form>
+
+
 <table class="table">
     <tr>
         <th>ID</th>
@@ -38,11 +54,23 @@
     </tr>
     {% endfor %}
 </table>
+<nav aria-label="...">
+    <ul class="pagination pagination-sm">
+        {% for p in range(paginas) %}
+        {% if pagina_atual == (p+1) %}
+            <li class="page-item active" aria-current="page">
+        {% else %}
+            <li class="page-item">
+        {% endif %}
+            <a class="page-link" href="/professores/pagina/{{ p + 1 }}">{{ p + 1 }}</a></li>
+        {% endfor %}
+    </ul>
+  </nav>
 {% else %}
 <div class="alert alert-danger">Nenhum professor encontrada para esta busca.</div>
 
 {% endif %}
-<a type="button" class="btn btn-primary" href='/professores/inserir'>Inserir novo professor</a>
+
 <script>
     setTimeout(function() {
     $('#sumir').fadeOut('fast');

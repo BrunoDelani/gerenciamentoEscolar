@@ -3,7 +3,7 @@
 {% block conteudo %}
 
 <h1>Listagem de alunos</h1>
-
+<a type="button" class="btn btn-primary" href='/alunos/inserir'>Inserir novo aluno</a>
 {% if msg == 'deletado' %}
 <div class="alert alert-danger" id="sumir" role="alert">Deletado com sucesso!</div>
 <meta http-equiv="refresh" content="1; URL='http://127.0.0.1:5000/alunos'"/>
@@ -42,7 +42,7 @@
 <div class="alert alert-danger">Nenhum aluno encontrado para esta busca.</div>
 
 {% endif %}
-<a type="button" class="btn btn-primary" href='/alunos/inserir'>Inserir novo aluno</a>
+
 <script>
     setTimeout(function() {
     $('#sumir').fadeOut('fast');

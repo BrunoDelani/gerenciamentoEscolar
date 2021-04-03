@@ -3,6 +3,7 @@
 {% block conteudo %}
 
 <h1>Listagem de Disciplinas</h1>
+<a type="button" class="btn btn-primary" href='/disciplinas/inserir'>Inserir nova disciplina</a>
 
 {% if msg == 'deletado' %}
 <div class="alert alert-danger" id="sumir" role="alert">Deletado com sucesso!</div>
@@ -42,7 +43,7 @@
 <div class="alert alert-danger">Nenhuma disciplina encontrada para esta busca.</div>
 
 {% endif %}
-<a type="button" class="btn btn-primary" href='/disciplinas/inserir'>Inserir nova disciplina</a>
+
 <script>
     setTimeout(function() {
     $('#sumir').fadeOut('fast');
