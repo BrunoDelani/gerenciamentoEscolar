@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<h2>Login</h2>
+
+{% if mensagem %}
+<div class="alert alert-danger" id="sumir" role="alert">{{ mensagem }}</div>
+{% endif %}
+
+<form action="/login" method="POST" class="from">
+<div class="form-group mt-3 mb-3">
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" class="form-control">
+</div>
+<div class="form-group mt-3 mb-3">
+    <label for="senha">Senha:</label>
+    <input type="password" name="senha" id="senha" class="form-control">
+</div>
+<input type="submit" value="Login" class="btn btn-primary mt-3 mb-3">
+</form>
+<a href="/esqueci-minha-senha">Esqueci minha senha</a>
+
+{% endblock %}

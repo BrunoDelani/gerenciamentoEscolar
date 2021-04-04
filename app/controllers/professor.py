@@ -4,24 +4,27 @@ from app.models.tables import Professor
 from app import db
 import bcrypt
 
+from flask_login import login_required
+
 @app.route('/professores')
 @app.route('/professores/pagina/<int:pagina>/')
+@login_required
 def listar_professores(pagina = 1):
     msg = request.args.get('msg')
     nome = request.args.get('nome')
     if nome:
         nome = '%' + nome + '%'
-        paginacao = Professor.query.filter(Professor.nome.like(nome)).paginate(page = pagina, per_page= 5)
+        paginacao = Professor.query.filter(Professor.nome.like(nome)).paginate(page = pagina, per_page= 10)
         professores = paginacao.items
         total_paginas = paginacao.total
-        totalpaginas = total_paginas/5
+        totalpaginas = total_paginas/10
         totalpaginas = round(totalpaginas + 0.5)
     else:
         # professores = Professor.query.all()
-        paginacao = Professor.query.paginate(page = pagina, per_page= 5)
+        paginacao = Professor.query.paginate(page = pagina, per_page= 10)
         professores = paginacao.items
         total_paginas = paginacao.total
-        totalpaginas = total_paginas/5
+        totalpaginas = total_paginas/10
         totalpaginas = round(totalpaginas + 0.5)
 
 

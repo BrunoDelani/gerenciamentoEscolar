@@ -8,7 +8,15 @@
 </head>
 <body>
     <header class="bg-success text-light pt-3 pb-3">
+        <div class="container" style=" display: flex; justify-content: space-between;">
         <div class="container" style="font-size: 24px; font-weight: bolder;">Gerenciamento Escolar</div>
+        <div style=" display: flex;">
+            {% if current_user.is_authenticated %}
+            <div style="font-size: 18px; font-weight: bolder; text-align: end; width: 200px; margin: 3px 50px;">Olá, {{ current_user.nome }}</div>
+            <div><a href="/logout" class="btn btn-primary">Sair</a></div>
+            {% endif %}
+        </div>
+    </div>
     </header>
     <main class="container">
         {% block conteudo %}
